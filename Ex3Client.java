@@ -19,14 +19,21 @@ public class Ex3Client {
     		
     		
     		//Read single byte of data. unsigned. This will be the number of bytes to follow.
-    		int numbOfBytes;
-    		numbOfBytes = dis.readUnsignedByte();
+    		int numOfBytes;
+    		numOfBytes = dis.readUnsignedByte();
     		
-    		System.out.println("Reading in " + numbOfBytes + " Bytes.");
+    		
+    		System.out.println("Reading in " + numOfBytes + " Bytes.");
     		System.out.println("Data recived: ");
     		//Store bytes into an array.
-    		byte[] byteArray = new byte[numbOfBytes];
-    		for(int i = 0; i < byteArray.length; i++)
+    		byte[] byteArray = null;
+    		
+    		if(numOfBytes % 2 != 0)
+    			byteArray = new byte[numOfBytes + 1];
+    		else
+    			byteArray = new byte[numOfBytes];
+    		
+    		for(int i = 0; i < numOfBytes; i++)
     		{
     			byteArray[i] = (byte)(dis.readUnsignedByte());
     		}
@@ -49,13 +56,13 @@ public class Ex3Client {
     		else
     			System.out.println("Check sum not good.");
     		
-    		
-    		
-    		
-    		
-    		
         }
 	}
+	
+	
+	
+	
+	
 	
 	/**
 	 * This method implements the Internet checksum algorithm.
@@ -86,6 +93,10 @@ public class Ex3Client {
 		}
 		return (short)(~(sum & 0xFFFF));
 	}
+	
+	
+	
+	
 	
 	
 	/**
